@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-6 mx-auto">
         <ul class="pagination justify-content-center">
-          <li class="page-item" :class="{ disabled: pagination.has_next }">
+          <li class="page-item" :class="{ disabled: !pagination.has_pre }">
             <a
               class="page-link"
               aria-label="Previous"
@@ -20,7 +20,7 @@
           >
             <a class="page-link" @click="getdata(item)" >{{ item }}</a>
           </li>
-          <li class="page-item" :class="{ disabled: pagination.has_pre }">
+          <li class="page-item" :class="{ disabled: !pagination.has_next }">
             <a
               class="page-link"
               aria-label="Next"
@@ -40,6 +40,7 @@ export default {
   methods: {
     getdata (page) {
       this.$emit('updata', page)
+      console.log(this.pagination)
     }
   }
 }
