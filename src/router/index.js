@@ -33,10 +33,6 @@ const routes = [
       import('../views/NotFound.vue')
   },
   {
-    path: '/admin/:pathMatch(.*)*',
-    redirect: { name: 'Home' }
-  },
-  {
     path: '/Login',
     name: 'Login',
     component: () =>

@@ -96,7 +96,6 @@ export default {
       this.$http.get(`${this.url}api/${this.path}/products?page=${num}`)
         .then(res => {
           if (res.data.success) {
-            console.log(res)
             this.products = res.data.products
             this.pagination = res.data.pagination
           } else {
