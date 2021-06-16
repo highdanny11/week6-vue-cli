@@ -1,5 +1,7 @@
 module.exports = {
-  publicPath: './',
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/week6-vue-cli/'
+  : '/',
     outputDir: 'dist',
     assetsDir:'static'
 }
