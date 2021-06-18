@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e5e97"],{9703:function(c,e,n){"use strict";n.r(e);var t=n("7a23"),s={class:"container"},i=Object(t["g"])("div",{class:"row justify-content-center"},[Object(t["g"])("div",{class:"h1"},"404"),Object(t["g"])("div",{class:"h2"},"找不到頁面")],-1);function a(c,e){return Object(t["s"])(),Object(t["d"])("div",s,[i])}const d={};d.render=a;e["default"]=d}}]);
-//# sourceMappingURL=chunk-2d0e5e97.fa45dc04.js.map

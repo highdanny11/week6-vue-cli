@@ -1,6 +1,17 @@
 <template>
   <div class="container mt-3">
-    <div class="row justify-content-center">
+    <Loading :active="isLoading" >
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </Loading>
+    <div class="row justify-content-center" >
       <div class="col">
         <table class="table align-middle">
           <thead>
@@ -46,7 +57,7 @@
               <td>
                 <router-link
                   class="btn btn-outline-secondary"
-                   :to="`/Product/${item.id}`"
+                  :to="`/Product/${item.id}`"
                 >
                   產品細項
                 </router-link>
@@ -88,14 +99,18 @@ export default {
       products: {},
       pagination: {},
       id: '',
-      cart: {}
+      cart: {},
+      isLoading: false
     }
   },
   methods: {
     getdata (num = 1) {
-      this.$http.get(`${this.url}api/${this.path}/products?page=${num}`)
-        .then(res => {
+      this.isLoading = true
+      this.$http
+        .get(`${this.url}api/${this.path}/products?page=${num}`)
+        .then((res) => {
           if (res.data.success) {
+            this.isLoading = false
             this.products = res.data.products
             this.pagination = res.data.pagination
           } else {
@@ -103,6 +118,9 @@ export default {
           }
         })
     }, // 取得商品列表
+    onCancel () {
+      console.log('123')
+    },
     toCart (item) {
       this.id = item.id // 開啟loading判斷模式
       this.cart = {
@@ -114,15 +132,17 @@ export default {
     openModal (item) {
       console.log(item)
     },
-    addCart (num = 1) { // 加入購物車
+    addCart (num = 1) {
+      // 加入購物車
       this.cart.qty = num
-      this.$http.post(`${this.url}api/${this.path}/cart`, { data: this.cart })
-        .then(res => {
+      this.$http
+        .post(`${this.url}api/${this.path}/cart`, { data: this.cart })
+        .then((res) => {
           if (res.data.success) {
             this.id = ''
             console.log(res.data)
           } else {
-            console.log('失敗')
+            console.log('')
           }
         })
     }
