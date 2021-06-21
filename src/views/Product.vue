@@ -22,6 +22,9 @@ export default {
           console.log('失敗')
         }
       })
+      .catch((res) => {
+        console.log(res)
+      })
   }
 }
 </script>

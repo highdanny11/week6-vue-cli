@@ -69,7 +69,10 @@ export default {
             this.user.username = ''
             this.user.password = ''
           }
-        }).catch((error) => { console.log(error) })
+        })
+        .catch((res) => {
+          console.log(res)
+        })
     }
   }
 }

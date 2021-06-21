@@ -1,14 +1,28 @@
 <template>
-<div class="container mt-3">
-  <ul class="nav justify-content-center bg-light">
-  <li class="nav-item">
-    <a class="nav-link" @click="signout()" aria-current="page" >登出</a>
-  </li>
-  <li class="nav-item">
-    <a href="#" class="nav-link" aria-current="page" >回前台</a>
-  </li>
-</ul>
-</div>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">商城</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#list"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="list">
+        <div class="navbar-nav">
+          <a href="#" class="nav-link" @click.prevent="signout()" aria-current="page" >登出</a>
+          <router-link class="nav-link" to="/admin">產品列表</router-link>
+          <router-link class="nav-link" to="/admin/orderlist">訂單列表</router-link>
+          <router-link class="nav-link" to="/admin/coupons">優惠卷列表</router-link>
+        </div>
+      </div>
+    </div>
+  </nav>
 <div class="container">
   <router-view v-if="check">
   </router-view>

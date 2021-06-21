@@ -16,7 +16,7 @@
         <table class="table align-middle">
           <thead>
             <tr>
-              <th scope="col" style="width: 250px">產品</th>
+              <th scope="col" style="width: 250px;">產品</th>
               <th scope="col">產品名稱</th>
               <th scope="col" style="width: 80px">原價</th>
               <th scope="col" style="width: 80px">售價</th>
@@ -30,7 +30,7 @@
               <th scope="row">
                 <img
                   :src="item.imageUrl"
-                  style="width: 200px; height: 150px"
+                  style="width: 200px; height: 150px;object-fit:cover;"
                   alt=""
                 />
               </th>
@@ -100,7 +100,8 @@ export default {
       pagination: {},
       id: '',
       cart: {},
-      isLoading: false
+      isLoading: false,
+      animated: 'animated filp'
     }
   },
   methods: {
@@ -117,6 +118,9 @@ export default {
             console.log(res)
           }
         })
+        .catch((res) => {
+          console.log(res)
+        })
     }, // 取得商品列表
     onCancel () {
       console.log('123')
@@ -129,9 +133,6 @@ export default {
       }
       this.addCart()
     },
-    openModal (item) {
-      console.log(item)
-    },
     addCart (num = 1) {
       // 加入購物車
       this.cart.qty = num
@@ -140,10 +141,12 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.id = ''
-            console.log(res.data)
           } else {
             console.log('')
           }
+        })
+        .catch((res) => {
+          console.log(res)
         })
     }
   },

@@ -175,6 +175,9 @@ export default {
           console.log('失敗')
         }
       })
+        .catch((res) => {
+          console.log(res)
+        })
     },
     upCart (item) {
       // 更改購物車資訊
@@ -193,6 +196,9 @@ export default {
             console.log('失敗')
           }
         })
+        .catch((res) => {
+          console.log(res)
+        })
     },
     allCartsDel () {
       // 全部刪掉
@@ -203,6 +209,9 @@ export default {
           console.log('失敗')
         }
       })
+        .catch((res) => {
+          console.log(res)
+        })
     },
     oneCartDel (id) {
       // 單一刪掉
@@ -214,6 +223,9 @@ export default {
           } else {
             console.log('失敗')
           }
+        })
+        .catch((res) => {
+          console.log(res)
         })
     },
     selectSubmit (value) {
@@ -234,6 +246,9 @@ export default {
           } else {
             console.log(res)
           }
+        })
+        .catch((res) => {
+          console.log(res)
         })
     },
     isPhone (value) {

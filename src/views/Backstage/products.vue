@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="d-flex flex-row-reverse">
-      <a  class="btn btn-primary btn-lg mt-3" @click="edit()">新增</a>
+      <a href="#" class="btn btn-primary btn-lg mt-3" @click.prevent="edit()">新增</a>
     </div>
     <div class="row justify-content-center">
       <div class="col">
@@ -95,6 +95,9 @@ export default {
           } else {
             console.log('失敗')
           }
+        })
+        .catch((res) => {
+          console.log(res)
         })
     },
     edit (item = true) {

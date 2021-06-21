@@ -47,6 +47,16 @@ const routes = [
         path: '',
         component: () =>
           import('../views/Backstage/products.vue')
+      },
+      {
+        path: 'orderlist',
+        component: () =>
+          import('../views/Backstage/Orderlist.vue')
+      },
+      {
+        path: 'coupons',
+        component: () =>
+          import('../views/Backstage/Coupons.vue')
       }
     ]
   }

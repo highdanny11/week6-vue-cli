@@ -5,9 +5,10 @@
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="{ disabled: !pagination.has_pre }">
             <a
+              href="#"
               class="page-link"
               aria-label="Previous"
-              @click="getdata(pagination.current_page - 1)"
+              @click.prevent="getdata(pagination.current_page - 1)"
             >
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -18,13 +19,14 @@
             :class="{ active: item === pagination.current_page }"
             :key="i"
           >
-            <a class="page-link" @click="getdata(item)" >{{ item }}</a>
+            <a class="page-link" href="#" @click.prevent="getdata(item)" >{{ item }}</a>
           </li>
           <li class="page-item" :class="{ disabled: !pagination.has_next }">
             <a
+              href="#"
               class="page-link"
               aria-label="Next"
-              @click="getdata(pagination.current_page + 1)"
+              @click.prevent="getdata(pagination.current_page + 1)"
             >
               <span aria-hidden="true">&raquo;</span>
             </a>
