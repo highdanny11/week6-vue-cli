@@ -89,6 +89,7 @@
 <script>
 import Pagination from '@/components/Pagination.vue'
 export default {
+  inject: ['send'],
   components: {
     Pagination
   },
@@ -139,9 +140,10 @@ export default {
         .post(`${this.url}api/${this.path}/cart`, { data: this.cart })
         .then((res) => {
           if (res.data.success) {
+            this.send(res.data)
             this.id = ''
           } else {
-            console.log('')
+            console.log('加入失敗')
           }
         })
         .catch((res) => {

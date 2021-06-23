@@ -10,11 +10,12 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </Loading>
-<Card :product="product"></Card>
+<Card :product="product" @tosend="cardtosend"></Card>
 </template>
 <script>
 import Card from '@/components/Card.vue'
 export default {
+  inject: ['send'],
   components: {
     Card
   },
@@ -22,6 +23,11 @@ export default {
     return {
       product: {},
       isLoading: false
+    }
+  },
+  methods: {
+    cardtosend (res) {
+      this.send(res)
     }
   },
   mounted () {

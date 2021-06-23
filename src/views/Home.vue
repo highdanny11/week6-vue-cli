@@ -21,5 +21,20 @@
       </div>
     </div>
   </nav>
+  <Toast></Toast>
   <router-view></router-view>
 </template>
+<script>
+import Toast from '@/components/Toast.vue'
+import evenbus from '@/methods/evenbus'
+export default {
+  components: { Toast },
+  provide () {
+    return {
+      send (res) { // 各子元件經由這父元件傳送資料至吐司視窗
+        evenbus.emit('push-masg', res)
+      }
+    }
+  }
+}
+</script>
