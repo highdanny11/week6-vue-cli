@@ -5,7 +5,7 @@
     role="alert"
   >
     <div class="toast-body p-2 rounded me-2 d-inline-block" v-for="(item, key) in cup" :key="key" >
-      <span class="p-2 rounded me-2 d-inline-block" :class="{'bg-danger':!item.success,'bg-success':item.success}"></span>
+      <span class="p-2 rounded me-2 d-inline-block" :class="{'bg-danger':!item.success,'bg-success':item.success}"><i class="far fa-bell"></i></span>
       <strong class="me-auto">{{item.message}}</strong>
       <button type="button" class="btn-close" @click="closetoat" aria-label="Close"></button>
     </div>
