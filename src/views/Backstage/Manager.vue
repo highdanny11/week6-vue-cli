@@ -23,13 +23,24 @@
       </div>
     </div>
   </nav>
+  <Toast></Toast>
 <div class="container">
   <router-view v-if="check">
   </router-view>
 </div>
 </template>
 <script>
+import Toast from '@/components/Toast.vue'
+import evenbus from '@/methods/evenbus'
 export default {
+  provide () {
+    return {
+      send (res) { // 各子元件經由這父元件傳送資料至吐司視窗
+        evenbus.emit('push-masg', res)
+      }
+    }
+  },
+  components: { Toast },
   data () {
     return {
       check: false

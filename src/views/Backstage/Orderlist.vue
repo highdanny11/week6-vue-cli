@@ -1,4 +1,15 @@
 <template>
+<Loading :active="isLoading" >
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning mx-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </Loading>
   <div class="container mt-3">
     <div class="row">
       <table class="table" v-if="chang">
@@ -107,21 +118,25 @@
 </template>
 <script>
 export default {
+  inject: ['send'],
   data () {
     return {
       orders: {},
       pagination: {},
       chang: true,
-      order: {}
+      order: {},
+      isLoading: false
     }
   },
   methods: {
     getdata (num = 1) {
+      this.isLoading = true
       this.$http
         .get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/orders?page=${num}`)
         .then((res) => {
           if (res.data.success) {
             console.log(res.data)
+            this.isLoading = false
             this.pagination = res.data.pagination
             this.orders = res.data.orders
             this.orders.forEach((item) => {
@@ -146,6 +161,8 @@ export default {
         .delete(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/order/${id}`)
         .then((res) => {
           if (res.data.success) {
+            this.send(res.data) // 傳送資料至吐司視窗
+            this.getdata()
             console.log('刪除成功')
             this.getdata()
           } else {
@@ -168,7 +185,8 @@ export default {
         })
         .then((res) => {
           if (res.data.success) {
-            console.log(res.data)
+            this.send(res.data) // 傳送資料至吐司視窗
+            this.getdata()
             this.back()
           } else {
             console.log(res.data)
@@ -186,6 +204,7 @@ export default {
         .delete(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/orders/all`)
         .then((res) => {
           if (res.data.success) {
+            this.send(res.data) // 傳送資料至吐司視窗
             console.log(res.data)
             this.getdata()
           } else {

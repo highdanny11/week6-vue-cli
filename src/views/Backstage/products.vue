@@ -1,5 +1,16 @@
 <template>
   <div class="container">
+    <Loading :active="isLoading" >
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning mx-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </Loading>
     <div class="d-flex flex-row-reverse">
       <a href="#" class="btn btn-primary btn-lg mt-3" @click.prevent="edit()">新增</a>
     </div>
@@ -79,14 +90,17 @@ export default {
     return {
       products: [],
       temporaryZone: {},
-      pagination: {}
+      pagination: {},
+      isLoading: false
     }
   },
   methods: {
     getdata (num = 1) { // 載入後端資料
+      this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${num}`)
         .then(res => {
           if (res.data.success) {
+            this.isLoading = false
             this.products = res.data.products
             this.pagination = res.data.pagination
             this.products.forEach(item => {
@@ -109,7 +123,6 @@ export default {
         this.$refs.modal.openModal(addProduct)
       } else {
         this.temporaryZone = { ...item }// 存進去暫放區
-        console.log(item)
         if (Object.prototype.hasOwnProperty.call(this.temporaryZone, 'star') === false) { // 判斷是否有平價星的欄位
           this.temporaryZone.star = 5
           this.$refs.modal.openModal(this.temporaryZone)

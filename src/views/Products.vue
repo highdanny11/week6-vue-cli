@@ -4,7 +4,7 @@
       <div class="spinner-grow text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-      <div class="spinner-grow text-warning" role="status">
+      <div class="spinner-grow text-warning mx-3" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
       <div class="spinner-grow text-success" role="status">
@@ -100,8 +100,7 @@ export default {
       pagination: {},
       id: '',
       cart: {},
-      isLoading: false,
-      animated: 'animated filp'
+      isLoading: false
     }
   },
   methods: {

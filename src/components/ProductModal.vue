@@ -217,6 +217,7 @@
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
+  inject: ['send'],
   data () {
     return {
       imgurl: '',
@@ -286,8 +287,7 @@ export default {
             .then((res) => {
               if (res.data.success) {
                 this.$emit('dataup') // 上傳後更新
-
-                console.log(res.data.success)
+                this.send(res.data) // 傳送資料至吐司視窗
               } else {
                 console.log(res.data.success)
               }
@@ -315,7 +315,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             alert('更新成功')
-            console.log(res)
+            this.send(res.data)// 傳送資料至吐司視窗
             this.$emit('dataup') // 上傳失敗重新載入，避免上面程式碼更改值後，出現螢幕與後台資料不一樣
           } else {
             alert('更新失敗')

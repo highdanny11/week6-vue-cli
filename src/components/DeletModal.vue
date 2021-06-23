@@ -50,6 +50,7 @@
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
+  inject: ['send'],
   data () {
     return {
       del: '',
@@ -61,6 +62,7 @@ export default {
       this.$http.delete(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/product/${this.id}`).then((res) => {
         if (res.data.success) {
           this.$emit('deldata')// 刪除後更新
+          this.send(res.data)
         } else {
           alert('刪除失敗')
         }

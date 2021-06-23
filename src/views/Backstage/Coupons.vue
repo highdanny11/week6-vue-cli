@@ -1,4 +1,15 @@
 <template>
+<Loading :active="isLoading" >
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning mx-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </Loading>
   <div
     class="modal fade"
     ref="addeditModal"
@@ -174,9 +185,11 @@
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
+  inject: ['send'],
   data () {
     return {
       coupons: {},
+      isLoading: false,
       couponModal: '',
       coupon: {
         title: '',
@@ -194,11 +207,12 @@ export default {
   },
   methods: {
     getdata (num = 1) {
+      this.isLoading = true
       this.$http
         .get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${num}`)
         .then((res) => {
           if (res.data.success) {
-            console.log(res.data)
+            this.isLoading = false
             this.pagination = res.data.pagination
             this.coupons = res.data.coupons
             this.coupons.forEach((item) => {
@@ -236,6 +250,7 @@ export default {
           .then((res) => {
             if (res.data.success) {
               this.loading = false
+              this.send(res.data) // 傳送資料至吐司視窗
               console.log(res)
               this.getdata()
               this.clearCoupon()
@@ -272,6 +287,7 @@ export default {
           .then((res) => {
             if (res.data.success) {
               this.loading = false
+              this.send(res.data) // 傳送資料至吐司視窗
               console.log(res)
               this.getdata()
               this.clearCoupon()
@@ -313,6 +329,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             console.log(res)
+            this.send(res.data) // 傳送資料至吐司視窗
             this.getdata()
             this.text = ''
           } else {
@@ -326,6 +343,7 @@ export default {
     addeditCoupon () {
       this.text = ''
       this.clearCoupon()
+      this.coupon.due_date = new Date().toISOString().split('T')[0]
       this.statusbtn = true
       this.couponModal.show()
     }

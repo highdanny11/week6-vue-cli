@@ -1,4 +1,15 @@
 <template>
+<Loading :active="isLoading" >
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning mx-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </Loading>
   <div class="container mt-3">
     <div class="d-flex flex-row-reverse">
       <a
@@ -154,6 +165,7 @@ export default {
       url: '',
       path: '',
       submit: 'true',
+      isLoading: false,
       form: {
         user: {
           email: '',
@@ -166,10 +178,12 @@ export default {
   },
   methods: {
     showCart () {
+      this.isLoading = true
       // 購物車列表
       this.$http.get(`${this.url}api/${this.path}/cart`).then((res) => {
         if (res.data.success) {
           this.cartsData = res.data.data
+          this.isLoading = false
           this.selectSubmit(this.cartsData.total)
         } else {
           console.log('失敗')
